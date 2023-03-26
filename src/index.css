@@ -1,0 +1,209 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap");
+/* RESET */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*VARIABLES Root ile birliktede kullanılabilir */
+.theme1{
+    --main-bg: #3A4663;
+    --text-color: #FFFFFF;
+    --theme-bg: #242D44;
+    --theme-btn-color: #D03F2F;
+    --result-bg: #181F33;
+    --key-bg: #EAE3DC;
+    --key-text: #434A59;
+    --key-secondary: #647198;
+}
+
+.theme2{
+    --main-bg: #E6E6E6;
+    --text-color: #36362C;
+    --theme-bg: #D2CDCD;
+    --theme-btn-color: #C85402;
+    --result-bg: #EEEEEE;
+    --key-bg: #E5E4E1;
+    --key-text: #36362C;
+    --key-secondary: #378187;
+}
+
+.theme3 {
+    --main-bg: #17062A;
+    --text-color: #FFE53D;
+    --theme-bg: #1E0936;
+    --theme-btn-color: #00DED0;
+    --result-bg: #1E0936;
+    --key-bg: #331C4D;
+    --key-text: #FFE53D;
+    --key-secondary: #56077C;
+}
+
+button{
+    outline: none;
+    border: none;
+}
+
+input{
+    border: none;
+    outline: none;
+}
+
+body{
+    height: 100vh;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-family: 'League Spartan', sans-serif;
+    background-color: var(--main-bg);
+}
+
+.brand{
+    font-size: 32px;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.theme-text{
+    color: var(--text-color);
+}
+
+.calculator-container{
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: grid;
+    gap: 20px;
+}
+
+.calculator-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.theme{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.themes-container{
+    display: flex;
+}
+
+.theme-select{
+    display: flex;
+    flex-direction: column;
+}
+
+.theme-select label {
+    display: flex;
+    flex-direction: column;
+}
+
+.theme-select label span{
+    text-align: center;
+    color: var(--text-color);
+}
+
+.custom-select{
+    padding: .2rem;
+    background-color: var(--theme-bg);
+    cursor: pointer;
+}
+
+.custom-select .inner{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.custom-select .inner.active {
+    background-color: var(--theme-btn-color);
+}
+
+.first{
+    border-top-left-radius: 40%;
+    border-bottom-left-radius: 40%;
+}
+
+.third{
+    border-top-right-radius: 40%;
+    border-bottom-right-radius: 40%;
+}
+
+.theme-select input{
+    display: none;
+}
+
+.calculator-result{
+    width: 100%;
+}
+
+.calculator-input{
+    width: 100%;
+    padding: 1rem;
+    font-size: 2rem;
+    text-align: right;
+    background-color: var(--result-bg);
+    color: var(--text-color);
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+.calculator-input::-webkit-outer-spin-button,
+.calculator-input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.calculator-buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    padding: 24px;
+    background-color: var(--theme-bg);
+    border-radius: 6px;
+}
+
+.calculator-buttons button{
+    background-color: var(--key-bg);
+    color: var(--key-text);
+    border-radius: 4px;
+    font-weight: 700;
+    font-family: 'League Spartan', sans-serif;
+    padding: 12px 10px;
+    box-shadow: 0 5px 0 0 rgba(0,0,0, 40%);
+    height: 64px;
+    cursor: pointer;
+}
+
+#reset{
+    grid-column: 1 / span 2;
+}
+
+#result{
+    grid-column: 3 / span 2;
+}
+
+.red{
+    background-color: var(--theme-btn-color) !important;
+    color: white !important;
+}
+
+.blue{
+    background-color: var(--key-secondary) !important;
+    color: white !important;
+}
+
+.button-number{
+    font-size: 32px;
+}
+
+.button-calculate{
+    font-size: 20px;
+}
+
