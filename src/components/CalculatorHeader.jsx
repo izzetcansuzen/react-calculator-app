@@ -3,6 +3,10 @@ import React, {useEffect, use, useState} from "react";
 export default function CalculatorHeader(){
     const [selectedID, setSelectedId] = useState("theme1");
 
+    useEffect(() => {
+        document.body.className = selectedID;
+    },[])
+
     function handleChange(e){
         const id = e.target.id;
         document.body.className = id;
