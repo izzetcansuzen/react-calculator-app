@@ -2,9 +2,13 @@ import React, {useState, useEffect} from "react";
 
 export default function CalculatorMain({value, setValue, calculate, setCalculate}){
 
-        const [submitValue, setSubmitValue] = useState(null);
+        /*
+                when user gets a result it must be equal to last calculated value - done
+                when user choose theme it should be saved
+                when user clicks more to same operator alert has come
+         */
 
-        //When number clicks
+        //when user clicks any number
         function handleClick(e){
                 const value = e.target.innerText;
                 setValue(oldValue => {
@@ -12,14 +16,18 @@ export default function CalculatorMain({value, setValue, calculate, setCalculate
                 })
         }
 
-        useEffect(() => {
-                setValue("")
-        },[calculate])
-
+        //when user clicks any operator
         function handleCalculate(e){
                 setCalculate(oldValue =>{
                         return [...oldValue, value, e.target.innerText]
                 })
+                if(e.target.innerText === "="){
+                        let text = ""
+                        calculate.forEach(item => {
+                                text += item
+                        })
+                        setCalculate(text + value);
+                }
         }
 
         //DEL
@@ -27,24 +35,25 @@ export default function CalculatorMain({value, setValue, calculate, setCalculate
                 setValue("");
         }
 
-        function handleSubmit(e) {
-                let text = ""
-                calculate.forEach(item => {
-                        text += item
-                })
-                setSubmitValue(text+value)
+        function setCalculateValueWihtValue() {
+                setCalculate([value.substring(1)])
         }
 
         useEffect(() => {
-                if(submitValue){
-                        setValue(eval(submitValue))
+                if(typeof calculate == "object"){
+                        if(calculate.length > 0 &&  calculate.includes("+") || calculate.includes("-") || calculate.includes("*") || calculate.includes("/")){
+                                setValue("")
+                        }
                 }
-        },[submitValue])
+                if(typeof calculate == "string"){
+                        setValue(eval(calculate))
+                        setCalculateValueWihtValue()
+                }
+        },[calculate])
 
         function handleReset(e) {
                 setValue("");
-                setCalculate("");
-                setSubmitValue([]);
+                setCalculate([]);
         }
 
     return(
@@ -66,7 +75,7 @@ export default function CalculatorMain({value, setValue, calculate, setCalculate
             <button className="button-number" onClick={handleCalculate}>/</button>
             <button className="button-number" onClick={handleCalculate}>*</button>
             <button className="blue button-calculate" id="reset" onClick={handleReset}>RESET</button>
-            <button className="red button-calculate" id="result" onClick={handleSubmit}>=</button>
+            <button className="red button-calculate" id="result" onClick={handleCalculate}>=</button>
         </div>
     )
 }
