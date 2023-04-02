@@ -1,7 +1,7 @@
 import React, {useEffect, use, useState} from "react";
 
 export default function CalculatorHeader(){
-    const [selectedID, setSelectedId] = useState("theme1");
+    const [selectedID, setSelectedId] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "theme1");
 
     useEffect(() => {
         document.body.className = selectedID;
@@ -9,6 +9,7 @@ export default function CalculatorHeader(){
 
     function handleChange(e){
         const id = e.target.id;
+        localStorage.setItem("theme", id)
         document.body.className = id;
         setSelectedId(id);
     }

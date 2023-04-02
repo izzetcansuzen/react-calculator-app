@@ -2,59 +2,63 @@ import React, {useState, useEffect} from "react";
 
 export default function CalculatorMain({value, setValue, calculate, setCalculate}){
 
-        /*
-                when user gets a result it must be equal to last calculated value - done
-                when user choose theme it should be saved
-                when user clicks more to same operator alert has come
-         */
+    /*
+            when user gets a result it must be equal to last calculated value -done
+            when user choose theme it should be saved -done
+            when user clicks more to same operator alert has come -done
+     */
 
-        //when user clicks any number
-        function handleClick(e){
-                const value = e.target.innerText;
-                setValue(oldValue => {
-                        return `${oldValue + value}`
-                })
+    //when user clicks any number
+    function handleClick(e){
+        const value = e.target.innerText;
+        setValue(oldValue => {
+            return `${oldValue + value}`
+        })
+    }
+
+    //when user clicks any operator
+    function handleCalculate(e){
+        if(calculate[calculate.length - 1] === e.target.innerText){
+            alert("operator is not same old value")
+        }else{
+            setCalculate(oldValue =>{
+                return [...oldValue, value, e.target.innerText]
+            })
         }
-
-        //when user clicks any operator
-        function handleCalculate(e){
-                setCalculate(oldValue =>{
-                        return [...oldValue, value, e.target.innerText]
-                })
-                if(e.target.innerText === "="){
-                        let text = ""
-                        calculate.forEach(item => {
-                                text += item
-                        })
-                        setCalculate(text + value);
-                }
+        if(e.target.innerText === "="){
+            let text = ""
+            calculate.forEach(item => {
+                text += item
+            })
+            setCalculate(text + value);
         }
+    }
 
-        //DEL
-        function handleDelete(){
-                setValue("");
+    //DEL
+    function handleDelete(){
+        setValue("");
+    }
+
+    function setCalculateValueWihtValue() {
+        setCalculate([value.substring(1)])
+    }
+
+    useEffect(() => {
+        if(typeof calculate == "object"){
+            if(calculate.length > 0 &&  calculate.includes("+") || calculate.includes("-") || calculate.includes("*") || calculate.includes("/")){
+                setValue("")
+            }
         }
-
-        function setCalculateValueWihtValue() {
-                setCalculate([value.substring(1)])
+        if(typeof calculate == "string"){
+            setValue(eval(calculate))
+            setCalculateValueWihtValue()
         }
+    },[calculate])
 
-        useEffect(() => {
-                if(typeof calculate == "object"){
-                        if(calculate.length > 0 &&  calculate.includes("+") || calculate.includes("-") || calculate.includes("*") || calculate.includes("/")){
-                                setValue("")
-                        }
-                }
-                if(typeof calculate == "string"){
-                        setValue(eval(calculate))
-                        setCalculateValueWihtValue()
-                }
-        },[calculate])
-
-        function handleReset(e) {
-                setValue("");
-                setCalculate([]);
-        }
+    function handleReset(e) {
+        setValue("");
+        setCalculate([]);
+    }
 
     return(
         <div className="calculator-buttons">
